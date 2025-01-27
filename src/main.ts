@@ -147,8 +147,6 @@ class Experience {
   private createScene = (engine: Engine) => {
     const scene = new Scene(engine);
     scene.clearColor = new Color4(1, 1, 1, 1);
-    // scene.createDefaultLight(true);
-    // scene.createDefaultEnvironment();
     return scene;
   };
 

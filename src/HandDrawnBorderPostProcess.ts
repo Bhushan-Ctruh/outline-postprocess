@@ -231,14 +231,11 @@ export class HandDrawnBorderPostProcess extends PostProcess {
       effect.setTexture("normalSampler", gBuffer.textures[1]);
       effect.setFloat("uOutlineThickness", this._outlineThickness);
       effect.setColor3("uOutlineColor", this._outlineColor);
-    };
-
-    this.onBeforeRenderObservable.add(() => {
       effect.setFloat("uFar", camera.maxZ);
       effect.setFloat("uNear", camera.minZ);
       effect.setMatrix("uViewProjection", camera.getProjectionMatrix());
       effect.setMatrix("uView", camera.getViewMatrix());
-    });
+    };
   }
 
   public setOutlineColor(color: string) {
