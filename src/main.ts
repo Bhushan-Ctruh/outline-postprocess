@@ -93,29 +93,27 @@ class Experience {
 
     //  })
 
+    const donut = MeshBuilder.CreateTorus(
+      "donut",
+      {
+        diameter: 5,
+        thickness: 1,
+      },
+      this.scene
+    );
+    donut.rotation.set(Math.PI / 2, 0, 0);
+    donut.position.set(0, 2, 0);
+
     box.isPickable = true;
     box2.isPickable = true;
     ground.isPickable = true;
+
+    donut.isPickable = true;
 
     const outlinePostProcess = new HandDrawnBorderPostProcess(
       "HandDrawnPostProcess",
       this.camera
     );
-
-    // const pane = new Pane();
-
-    // const PARAMS = {
-    //   normalOutlineDebug: true,
-    //   finalColor: false,
-    // };
-
-    // pane.addBinding(PARAMS, "normalOutlineDebug").on("change", () => {
-    //   outlinePostProcess.uNormalOutlineDebug = PARAMS.normalOutlineDebug;
-    // });
-
-    // pane.addBinding(PARAMS, "finalColor").on("change", () => {
-    //   outlinePostProcess.uFinalColor = PARAMS.finalColor;
-    // });
 
     this.scene.onPointerDown = (evt, pickInfo) => {
       if (pickInfo.pickedMesh) {

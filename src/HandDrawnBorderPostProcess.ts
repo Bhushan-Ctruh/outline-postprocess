@@ -34,12 +34,12 @@ Effect.ShadersStore[`${shaderUrl}FragmentShader`] = `
     return abs(linearDepth);
   }
 
-  vec3 getPosition(sampler2D depthSampler, vec2 uv) {
-    float depth = LinearizeDepth(depthSampler, uv);
-    vec4 ndc = vec4(uv * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);
-    vec4 viewPos = inverse(uViewProjection) * ndc;
-    return viewPos.xyz / viewPos.w;
-}
+  // vec3 getPosition(sampler2D depthSampler, vec2 uv) {
+  //   float depth = LinearizeDepth(depthSampler, uv);
+  //   vec4 ndc = vec4(uv * 2.0 - 1.0, depth * 2.0 - 1.0, 1.0);
+  //   vec4 viewPos = inverse(uViewProjection) * ndc;
+  //   return viewPos.xyz / viewPos.w;
+  // }
 
   const mat3 Sx = mat3( -1, -2, -1, 0, 0, 0, 1, 2, 1 );
   const mat3 Sy = mat3( -1, 0, 1, -2, 0, 2, -1, 0, 1 );
@@ -60,15 +60,15 @@ Effect.ShadersStore[`${shaderUrl}FragmentShader`] = `
 
   const vec2 center = vec2(0, 0);
 
-  float hash(vec2 p) {
-    vec3 p3  = fract(vec3(p.xyx) * .1031);
-    p3 += dot(p3, p3.yzx + 33.33);
+  // float hash(vec2 p) {
+  //   vec3 p3  = fract(vec3(p.xyx) * .1031);
+  //   p3 += dot(p3, p3.yzx + 33.33);
 
-    return fract((p3.x + p3.y) * p3.z);
-  }
+  //   return fract((p3.x + p3.y) * p3.z);
+  // }
 
-  const float frequency = 0.05;
-  const float amplitude = 2.0;
+  // const float frequency = 0.05;
+  // const float amplitude = 2.0;
 
   void main() {
 
@@ -154,7 +154,7 @@ Effect.ShadersStore[`${shaderUrl}FragmentShader`] = `
     // posEdge = smoothstep(0.001, 0.003, posEdge);
     
     float gradientNormal = sqrt(pow(xSobelValueNormal, 4.0) + pow(ySobelValueNormal, 4.0));                  
-    gradientNormal = smoothstep(0.01, 0.2, gradientNormal); 
+    gradientNormal = smoothstep(0.01, 0.5, gradientNormal); 
 
     float outline = max(gradientDepth, gradientNormal);
 
@@ -233,8 +233,8 @@ export class HandDrawnBorderPostProcess extends PostProcess {
       effect.setColor3("uOutlineColor", this._outlineColor);
       effect.setFloat("uFar", camera.maxZ);
       effect.setFloat("uNear", camera.minZ);
-      effect.setMatrix("uViewProjection", camera.getProjectionMatrix());
-      effect.setMatrix("uView", camera.getViewMatrix());
+      // effect.setMatrix("uViewProjection", camera.getProjectionMatrix());
+      // effect.setMatrix("uView", camera.getViewMatrix());
     };
   }
 
